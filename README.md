@@ -4,12 +4,24 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 
 # Here're the prerequisities.
 1. Install Cloud SDK https://cloud.google.com/sdk/docs/install#linux
-2. Initialize glcoud, run **glcoud init**
-3. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
-4. Clone the github repo to your local host, run **git clone https://github.com/yongkanghe/gke-k10.git**
-5. Run **createsa.sh** to create gcloud service account first
+2. Initialize glcoud, run below command
+````
+glcoud init
+````
+4. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
+5. Clone the github repo to your local host, run below command
+````
+git clone https://github.com/yongkanghe/gke-k10.git
+````
+7. Create gcloud service account first
+````
+createsa.sh
+````
 
-# To build the labs, run **deploy.sh**
+# To build the labs, run 
+````
+deploy.sh
+````
 1. Create a GKE Kubernetes Cluster from CLI
 2. Install Kasten K10
 3. Create a location profile
@@ -17,7 +29,10 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 5. Create a backup policy
 6. Kick off an on-demand backup job
 
-# To delete the labs, run **destroy.sh**
+# To delete the labs, run 
+````
+destroy.sh
+````
 1. Remove GKE Kubernetes Cluster
 2. Remove all the relevant disks
 3. Remove all the relevant snapshots
