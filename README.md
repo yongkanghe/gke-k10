@@ -50,4 +50,4 @@ https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using
 https://kasten.io 
 
 # Kasten selected as the best DevOps tool in July 2021
-https://www.linkedin.com/posts/yongkanghe_kubernetes-backup-restore-made-easy-activity-6822488395001008128-RDG_
+http://k10.yongkang.cloud
