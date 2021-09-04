@@ -49,5 +49,5 @@ https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using
 # Kasten - No. 1 Kubernetes Backup
 https://kasten.io 
 
-# Kasten selected as the best DevOps tool in July 2021
+# Kasten - DevOps tool of the month July 2021
 http://k10.yongkang.cloud
