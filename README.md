@@ -8,16 +8,20 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 ````
 glcoud init
 ````
-4. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
-5. Clone the github repo to your local host, run below command
+3. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
+4. Clone the github repo to your local host, run below command
 ````
 git clone https://github.com/yongkanghe/gke-k10.git
 ````
-7. Create gcloud service account first
+5. Create gcloud service account first
 ````
 createsa.sh
 ````
-
+6. Optionally, you may update the preferred clustername, machine-type, zone, region, bucketname
+````
+vi setenv.sh
+````
+ 
 # To build the labs, run 
 ````
 deploy.sh
