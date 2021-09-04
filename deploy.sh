@@ -1,7 +1,7 @@
 echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
 starttime=$(date +%s)
 . setenv.sh
-gcloud container clusters create $MY_CLUSTER \
+gcloud container clusters create $MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
