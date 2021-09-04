@@ -26,7 +26,7 @@ vi setenv.sh
 ````
 deploy.sh
 ````
-1. Create a GKE Kubernetes Cluster from CLI
+1. Create a GKE Cluster from CLI
 2. Install Kasten K10
 3. Create a location profile
 4. Deploy a Postgres database
