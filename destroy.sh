@@ -1,4 +1,4 @@
-startingtime="$(TZ=UTC0 printf '%(%s)T\n' '-1')"
+starttime=$(date +%s)
 . setenv.sh
 echo '-------Deleting a GKE Cluster (typically in less than 10 mins)'
 gcloud container clusters delete $MY_CLUSTER --zone $MY_ZONE --quiet
@@ -13,5 +13,6 @@ echo '-------Deleting objects from the bucket'
 myproject=$(gcloud config get-value core/project)
 gsutil -m rm -r gs://$myproject-$MY_BUCKET/k10
 
-duration=$(( $(TZ=UTC0 printf '%(%s)T\n' '-1') - startingtime ))
+endtime=$(date +%s)
+duration=$(( $endtime - $starttime ))
 echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) seconds."

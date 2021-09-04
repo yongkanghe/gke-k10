@@ -1,5 +1,5 @@
 echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
-startingtime="$(TZ=UTC0 printf '%(%s)T\n' '-1')"
+starttime=$(date +%s)
 . setenv.sh
 gcloud container clusters create $MY_CLUSTER \
   --zone $MY_ZONE \
@@ -153,5 +153,6 @@ EOF
 echo '-------Accessing K10 UI'
 cat gke-token
 
-duration=$(( $(TZ=UTC0 printf '%(%s)T\n' '-1') - startingtime ))
+endtime=$(date +%s)
+duration=$(( $endtime - $starttime ))
 echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) seconds."
