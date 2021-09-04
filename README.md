@@ -1,6 +1,9 @@
 It is challenging to create a GKE cluster from Google Cloud if you are not familiar to it. After the GKE Cluster is up running, we still need to install Kasten, create a sample DB, create policies etc.. 
 
-This script based automation allows you to build a ready-to-use Kasten K10 demo environment running on GKE in about 6 minutes. Below tasks will be automatically completed within 10 minutes.
+This script based automation allows you to build a ready-to-use Kasten K10 demo environment running on GKE in about 6 minutes. Below tasks will be automatically completed within 10 minutes. For simplicity and cost optimization, the GKE cluster will have only one worker node and be built in the default vpc using the default subnet. 
+
+# Kasten - No. 1 Kubernetes Backup
+https://www.linkedin.com/posts/yongkanghe_kubernetes-backup-restore-made-easy-activity-6822488395001008128-RDG_
 
 # Here're the prerequisities.
 1. Install Cloud SDK https://cloud.google.com/sdk/docs/install#linux
