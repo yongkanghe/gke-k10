@@ -10,6 +10,7 @@ https://www.linkedin.com/posts/yongkanghe_kubernetes-backup-restore-made-easy-ac
 2. Initialize glcoud, run **glcoud init**
 3. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
 4. Clone the github repo to your local host, run **git clone https://github.com/yongkanghe/gke-k10.git**
+5. Run **createsa.sh** to create gcloud service account first
 
 # To build the labs, run **deploy.sh**
 1. Create a GKE Kubernetes Cluster from CLI
