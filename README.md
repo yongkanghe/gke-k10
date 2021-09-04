@@ -25,3 +25,5 @@ https://www.linkedin.com/posts/yongkanghe_kubernetes-backup-restore-made-easy-ac
 2. Remove all the relevant disks
 3. Remove all the relevant snapshots
 
+# For more details about GKE Backup and Restore
+https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using-kasten-k10
