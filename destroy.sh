@@ -1,7 +1,7 @@
 starttime=$(date +%s)
 . setenv.sh
 echo '-------Deleting a GKE Cluster (typically in less than 10 mins)'
-gkeclustername=gcloud container clusters list | grep $MY_CLUSTER | awk '{print $1}'
+gkeclustername=$(gcloud container clusters list | grep $MY_CLUSTER | awk '{print $1}')
 gcloud container clusters delete $gkeclustername --zone $MY_ZONE --quiet
 
 echo '-------Deleting disks'
