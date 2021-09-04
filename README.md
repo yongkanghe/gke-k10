@@ -21,6 +21,7 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 1. Remove GKE Kubernetes Cluster
 2. Remove all the relevant disks
 3. Remove all the relevant snapshots
+4. Remove all the objects from the bucket
 
 # For more details about GKE Backup and Restore
 https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using-kasten-k10
