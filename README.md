@@ -17,6 +17,7 @@ git clone https://github.com/yongkanghe/gke-k10.git
 ````
 5. Create gcloud service account first
 ````
+cd gke-k10
 createsa.sh
 ````
 6. Optionally, you may update the preferred clustername, machine-type, zone, region, bucketname
