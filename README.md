@@ -18,7 +18,7 @@ git clone https://github.com/yongkanghe/gke-k10.git
 5. Create gcloud service account first
 ````
 cd gke-k10
-createsa.sh
+./createsa.sh
 ````
 6. Optionally, you may update the preferred clustername, machine-type, zone, region, bucketname
 ````
@@ -27,7 +27,7 @@ vi setenv.sh
  
 # To build the labs, run 
 ````
-deploy.sh
+./deploy.sh
 ````
 1. Create a GKE Cluster from CLI
 2. Install Kasten K10
@@ -38,7 +38,7 @@ deploy.sh
 
 # To delete the labs, run 
 ````
-destroy.sh
+./destroy.sh
 ````
 1. Remove GKE Kubernetes Cluster
 2. Remove all the relevant disks
