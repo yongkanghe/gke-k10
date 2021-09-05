@@ -5,7 +5,7 @@ gcloud container clusters create $MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
-  --cluster-version=1.20.8-gke.900 \
+  --cluster-version=1.20.8-gke.2100 \
   --no-enable-basic-auth \
   --addons=GcePersistentDiskCsiDriver \
   --enable-autoscaling --min-nodes 1 --max-nodes 3
