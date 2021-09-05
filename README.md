@@ -6,7 +6,7 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 
 # Here're the prerequisities.
 1. Install Cloud SDK https://cloud.google.com/sdk/docs/install#linux
-2. Initialize glcoud, run below command
+2. Initialize glcoud, run below command (required for MacOS and Linux, skip this if using Cloud Shell)
 ````
 glcoud init
 ````
@@ -17,10 +17,9 @@ git clone https://github.com/yongkanghe/gke-k10.git
 ````
 5. Create gcloud service account first
 ````
-cd gke-k10
-./createsa.sh
+cd gke-k10;./createsa.sh
 ````
-6. Optionally, you may update the preferred clustername, machine-type, zone, region, bucketname
+6. Optionally, you can customize the clustername, machine-type, zone, region, bucketname
 ````
 vi setenv.sh
 ````
