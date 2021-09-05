@@ -53,6 +53,10 @@ echo -e "\n$k10ui" >> gke-token
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo $clusterid >> gke-token
 
+echo '-------Deploy a PostgreSQL database'
+kubectl create namespace postgresql
+helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
+
 echo '-------Create a GCS profile secret'
 myproject=$(gcloud config get-value core/project)
 kubectl create secret generic k10-gcs-secret \
@@ -83,10 +87,6 @@ spec:
       objectStoreType: GCS
       region: $MY_REGION
 EOF
-
-echo '-------Deploy a PostgreSQL database'
-kubectl create namespace postgresql
-helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '------Create backup policies'
 cat <<EOF | kubectl apply -f -
