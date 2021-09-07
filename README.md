@@ -8,7 +8,7 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 1. Install Cloud SDK https://cloud.google.com/sdk/docs/install#linux
 2. Initialize glcoud, run below command (required for MacOS and Linux, skip this if using Cloud Shell)
 ````
-glcoud init
+gcloud init
 ````
 3. Install git if not installed, https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/
 4. Clone the github repo to your local host, run below command
