@@ -103,7 +103,7 @@ spec:
       backupParameters:
         profile:
           namespace: kasten-io
-          name: mygcs1
+          name: $MY_OBJECT_STORAGE_PROFILE
     - action: export
       exportParameters:
         frequency: "@hourly"
@@ -111,7 +111,7 @@ spec:
           name: ""
           namespace: ""
         profile:
-          name: mygcs1
+          name: $MY_OBJECT_STORAGE_PROFILE
           namespace: kasten-io
         receiveString: ""
         exportData:
