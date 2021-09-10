@@ -5,7 +5,7 @@ It is challenging to create a GKE cluster from Google Cloud if you are not famil
 This script based automation allows you to build a ready-to-use Kasten K10 demo environment running on GKE in about 6 minutes. For simplicity and cost optimization, the GKE cluster will have only one worker node and be built in the default vpc using the default subnet. This is bash shell based scripts which might only work on Linux and MacOS terminal or Cloud Shell. 
 
 # Here're the prerequisities. 
-## Step 1 to 3 required for MacOS and Linux, skip step 1 to 3 if using Cloud Shell.
+## Step 1 to 3 required for MacOS and Linux, skip for Cloud Shell.
 1. Install Cloud SDK https://cloud.google.com/sdk/docs/install#linux
 2. Initialize glcoud, run below command
 ````
