@@ -5,7 +5,7 @@ gcloud container clusters create $MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
-  --cluster-version=1.20.8-gke.2100 \
+  --cluster-version=1.20.8-gke.2101 \
   --no-enable-basic-auth \
   --addons=GcePersistentDiskCsiDriver \
   --enable-autoscaling --min-nodes 1 --max-nodes 3
@@ -55,6 +55,8 @@ echo $clusterid >> gke-token
 
 echo '-------Deploy a PostgreSQL database'
 kubectl create namespace postgresql
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
 helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '-------Create a GCS profile secret'
