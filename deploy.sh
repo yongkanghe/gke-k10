@@ -1,7 +1,8 @@
 echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
 starttime=$(date +%s)
 . setenv.sh
-gcloud container clusters create $(whoami)-$MY_CLUSTER-$(date +%s) \
+MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
+gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
@@ -84,7 +85,7 @@ spec:
         namespace: kasten-io
     type: ObjectStore
     objectStore:
-      name: $(whoami)-$MY_BUCKET
+      name: $MY_PREFIX-$MY_BUCKET
       objectStoreType: GCS
       region: $MY_REGION
 EOF
