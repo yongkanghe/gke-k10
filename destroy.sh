@@ -12,7 +12,7 @@ for i in $(gcloud compute snapshots list | grep $MY_CLUSTER | awk '{print $1}');
 
 echo '-------Deleting objects from the bucket'
 myproject=$(gcloud config get-value core/project)
-gsutil -m rm -r gs://$myproject-$MY_BUCKET/k10
+gsutil rm -r gs://$myproject-$MY_BUCKET
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
