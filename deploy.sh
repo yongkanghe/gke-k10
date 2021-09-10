@@ -1,7 +1,7 @@
 echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
 starttime=$(date +%s)
 . setenv.sh
-gcloud container clusters create $MY_CLUSTER-$(date +%s) \
+gcloud container clusters create $(whoami)-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
@@ -56,7 +56,6 @@ echo $clusterid >> gke-token
 echo '-------Deploying a PostgreSQL database'
 kubectl create namespace postgresql
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
 helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '-------Creating a GCS profile secret'
