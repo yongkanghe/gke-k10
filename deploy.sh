@@ -39,20 +39,25 @@ helm install k10 kasten/k10 --namespace=kasten-io \
   --set auth.tokenAuth.enabled=true \
   --set externalGateway.create=true
 
-echo '-------Extract the token for k10-k10 admin'
-sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
-kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode > gke-token
-sed -i -e '$a\' gke-token
-
 echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
 
-echo '-------Output the IP and token'
-sleep 100
-k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
-echo -e "\n$k10ui" >> gke-token
+echo '-------Output the Cluster ID, Web UI IP and token'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
-echo $clusterid >> gke-token
+echo "" | awk '{print $1}' > gke-token
+echo My Cluster ID is $clusterid >> gke-token
+#sleep 100
+k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
+echo -e "\nLogin to K10 Web UI click here -->> $k10ui" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+
+echo '-------Extract the token for k10-k10 admin'
+sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
+echo "Please enter below token to login" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+cat gke-token
 
 echo '-------Deploying a PostgreSQL database'
 kubectl create namespace postgresql
