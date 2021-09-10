@@ -48,7 +48,7 @@ kubectl config set-context --current --namespace kasten-io
 
 echo '-------Output the IP and token'
 sleep 100
-k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL):/k10/#
+k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
 echo -e "\n$k10ui" >> gke-token
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo $clusterid >> gke-token
