@@ -85,7 +85,7 @@ spec:
         namespace: kasten-io
     type: ObjectStore
     objectStore:
-      name: $myproject-$MY_BUCKET
+      name: $(whoami)-$MY_BUCKET
       objectStoreType: GCS
       region: $MY_REGION
 EOF
