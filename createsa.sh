@@ -1,4 +1,4 @@
-#-------Create a Google Cloud Service Account"
+#-------Creating a Google Cloud Service Account"
 myproject=$(gcloud config get-value core/project)
 gcloud iam service-accounts create k10-yong-sa --display-name "K10 Service Account"
 k10saemail=$(gcloud iam service-accounts list --filter "k10-yong-sa" --format="value(email)")

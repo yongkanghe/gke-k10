@@ -53,13 +53,13 @@ echo -e "\n$k10ui" >> gke-token
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo $clusterid >> gke-token
 
-echo '-------Deploy a PostgreSQL database'
+echo '-------Deploying a PostgreSQL database'
 kubectl create namespace postgresql
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
-echo '-------Create a GCS profile secret'
+echo '-------Creating a GCS profile secret'
 myproject=$(gcloud config get-value core/project)
 kubectl create secret generic k10-gcs-secret \
       --namespace kasten-io \
