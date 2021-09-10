@@ -5,3 +5,6 @@ k10saemail=$(gcloud iam service-accounts list --filter "k10-yong-sa" --format="v
 gcloud iam service-accounts keys create --iam-account=${k10saemail} k10-sa-key.json
 gcloud projects add-iam-policy-binding ${myproject} --member serviceAccount:${k10saemail} --role "roles/compute.storageAdmin"
 gcloud projects add-iam-policy-binding ${myproject} --member serviceAccount:${k10saemail} --role "roles/storage.admin"
+#-------Enabling Google Kubernetes Engine API"
+gcloud services enable container.googleapis.com
+
