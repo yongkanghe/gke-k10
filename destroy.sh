@@ -14,6 +14,9 @@ echo '-------Deleting objects from the bucket'
 myproject=$(gcloud config get-value core/project)
 gsutil rm -r gs://$myproject-$MY_BUCKET
 
+echo '-------Deleting kubeconfig for this cluster'
+kubectl config delete-context $(kubectl config get-contexts | grep $MY_CLUSTER | awk '{print $2}')
+
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
 echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) seconds."
