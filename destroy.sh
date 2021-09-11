@@ -13,7 +13,7 @@ for i in $(gcloud compute snapshots list | grep $MY_PREFIX-$MY_CLUSTER | awk '{p
 
 echo '-------Deleting the bucket'
 myproject=$(gcloud config get-value core/project)
-gsutil rm -r gs://$MY_PREFIX-$MY_BUCKET
+gsutil -m rm -r gs://$MY_PREFIX-$MY_BUCKET
 
 echo '-------Deleting kubeconfig for this cluster'
 kubectl config delete-context $(kubectl config get-contexts | grep $MY_PREFIX-$MY_CLUSTER | awk '{print $2}')
