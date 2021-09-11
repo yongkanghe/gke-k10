@@ -5,4 +5,4 @@ export MY_REGION=us-central1 #Customize your favorite region
 export MY_ZONE=us-central1-f #Customize your favorite zone
 export MY_BUCKET=k10bucket4yong1 #Customize your favorite bucket
 export MY_OBJECT_STORAGE_PROFILE=mygcs1 #Customize your favorite profile name
-export MY_K8S_VERSION=1.20 #Customize your favorite Kubernetes version
+export MY_K8S_VERSION=1.20.9 #Customize your favorite Kubernetes version
