@@ -11,7 +11,7 @@ for i in $(gcloud compute disks list --filter="zone:($MY_ZONE)" | grep $MY_PREFI
 echo '-------Deleting snapshots'
 for i in $(gcloud compute snapshots list | grep $MY_PREFIX-$MY_CLUSTER | awk '{print $1}');do echo $i;gcloud compute snapshots delete $i -q;done
 
-echo '-------Deleting objects from the bucket'
+echo '-------Deleting the bucket'
 myproject=$(gcloud config get-value core/project)
 gsutil rm -r gs://$MY_PREFIX-$MY_BUCKET
 
