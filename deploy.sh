@@ -2,7 +2,7 @@ echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
 starttime=$(date +%s)
 . setenv.sh
 MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
-MY_K8S_VERSION=$(gcloud container get-server-config | grep 1.20 | grep default | awk '{print $2}' | head -1)
+MY_K8S_VERSION=$(gcloud container get-server-config | grep $K8S_VERSION | awk '{print $2}' | head -1)
 gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
@@ -53,14 +53,11 @@ echo My Cluster ID is $clusterid >> gke-token
 k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
 echo -e "\nLogin to K10 Web UI click here -->> $k10ui" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
-
-echo '-------Extract the token for k10-k10 admin'
 sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
 echo "Please enter below token to login" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
 kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
 echo "" | awk '{print $1}' >> gke-token
-cat gke-token
 
 echo '-------Deploying a PostgreSQL database'
 kubectl create namespace postgresql
