@@ -41,7 +41,7 @@ echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
 
 echo '-------Waiting for K10 services are up running in about 2 mins'
-kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=catalog
+kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
 
 echo '-------Output the Cluster ID, Web UI IP and token'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
