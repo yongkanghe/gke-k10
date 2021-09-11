@@ -46,7 +46,7 @@ echo '-------Output the Cluster ID, Web UI IP and token'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo "" | awk '{print $1}' > gke-token
 echo My Cluster ID is $clusterid >> gke-token
-#sleep 100
+sleep 100
 k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
 echo -e "\nLogin to K10 Web UI click here -->> $k10ui" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
