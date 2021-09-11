@@ -2,7 +2,7 @@ echo '-------Creating a GKE Cluster (typically in less than 10 mins)'
 starttime=$(date +%s)
 . setenv.sh
 MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
-MY_K8S_VERSION=$(gcloud container get-server-config --flatten="channels" --filter="channels.channel=REGULAR" --region $MY_REGION | grep $K8S_VERSION | awk '{print $2}' | head -1)
+MY_K8S_VERSION=$(gcloud container get-server-config | grep 1.20 | grep default | awk '{print $2}' | head -1)
 gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
