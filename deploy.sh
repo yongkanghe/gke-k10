@@ -13,17 +13,15 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
 
 echo '-------Creating a gke pd vsc'
 cat <<EOF | kubectl apply -f -
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
+  annotations:
+    k10.kasten.io/is-snapshot-class: "true"
   name: gke-pd-vsc
 driver: pd.csi.storage.gke.io
 deletionPolicy: Delete
 EOF
-
-echo '-------Annotate the GKE-PD CSI VSC'
-kubectl annotate volumesnapshotclass gke-pd-vsc \
-    k10.kasten.io/is-snapshot-class=true
 
 echo '-------Install K10'
 sa_key=$(base64 -w0 k10-sa-key.json)
