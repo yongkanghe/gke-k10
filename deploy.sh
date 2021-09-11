@@ -7,7 +7,6 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
-  --release-channel=regular \
   --cluster-version=$MY_K8S_VERSION-gke.701 \
   --no-enable-basic-auth \
   --addons=GcePersistentDiskCsiDriver \
