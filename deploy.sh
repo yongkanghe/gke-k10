@@ -42,11 +42,13 @@ helm install k10 kasten/k10 --namespace=kasten-io \
 echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
 
+echo '-------Waiting for K10 services are up running'
+kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=catalog
+
 echo '-------Output the Cluster ID, Web UI IP and token'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo "" | awk '{print $1}' > gke-token
 echo My Cluster ID is $clusterid >> gke-token
-sleep 100
 k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
 echo -e "\nLogin to K10 Web UI click here -->> $k10ui" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
