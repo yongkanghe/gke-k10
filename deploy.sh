@@ -57,6 +57,20 @@ kubectl create secret generic k10-gcs-secret \
       --from-literal=project-id=$myproject \
       --from-file=service-account.json=k10-sa-key.json
 
+echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
+kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
+k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
+echo -e "\nCopy below token code before Click the link to log into K10 Web UI -->> $k10ui" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
+echo "Here is the token to login K10 Web UI" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+
+echo '-------Waiting for K10 services are up running in about 1 or 2 mins'
+kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
+
 echo '-------Creating a GCS profile'
 cat <<EOF | kubectl apply -f -
 apiVersion: config.kio.kasten.io/v1alpha1
@@ -128,20 +142,6 @@ spec:
         values:
           - postgresql
 EOF
-
-echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
-kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
-k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
-echo -e "\nCopy below token code before Click the link to log into K10 Web UI -->> $k10ui" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
-echo "Here is the token to login K10 Web UI" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-
-echo '-------Waiting for K10 services are up running in about 1 or 2 mins'
-kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
 
 echo '-------Kickoff the on-demand backup job'
 cat <<EOF | kubectl create -f -
