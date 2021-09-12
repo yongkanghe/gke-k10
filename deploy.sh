@@ -40,6 +40,11 @@ helm install k10 kasten/k10 --namespace=kasten-io \
 echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
 
+echo '-------Deploying a PostgreSQL database'
+kubectl create namespace postgresql
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
+
 echo '-------Waiting for K10 services are up running in about 3 mins more or less'
 kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
 
@@ -55,11 +60,6 @@ echo "Here is the token to login K10 Web UI" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
 kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
 echo "" | awk '{print $1}' >> gke-token
-
-echo '-------Deploying a PostgreSQL database'
-kubectl create namespace postgresql
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '-------Creating a GCS profile secret'
 myproject=$(gcloud config get-value core/project)
