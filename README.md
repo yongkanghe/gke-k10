@@ -48,7 +48,7 @@ vi setenv.sh
 4. Remove all the objects from the bucket
 
 # How to use it, watch the Youtube video.
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6vDEk_9cNaI/0.jpg)](https://www.youtube.com/watch?v=6vDEk_9cNaI)
+[![IMAGE ALT TEXT HERE](https://media-exp1.licdn.com/dms/image/C5622AQFAVpxHMBu7lw/feedshare-shrink_2048_1536/0/1630923993310?e=1634169600&v=beta&t=5f3TgJLeA4gpFubLrdtKrvFED3M_z5Q6igza3Ibaheo)](https://www.youtube.com/watch?v=6vDEk_9cNaI)
 
 # For more details about GKE Backup and Restore
 https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using-kasten-k10
