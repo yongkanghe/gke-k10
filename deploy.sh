@@ -50,19 +50,6 @@ clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo "" | awk '{print $1}' > gke-token
 echo My Cluster ID is $clusterid >> gke-token
 
-echo '-------Output the Web UI IP and token'
-k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
-echo -e "\nCopy below token code before Click the link to log into K10 Web UI -->> $k10ui" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
-echo "Here is the token to login K10 Web UI" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-
-echo '-------Waiting for K10 services are up running in about 3 mins more or less'
-kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
-
 echo '-------Creating a GCS profile secret'
 myproject=$(gcloud config get-value core/project)
 kubectl create secret generic k10-gcs-secret \
@@ -142,8 +129,21 @@ spec:
           - postgresql
 EOF
 
+echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
+kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
+k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
+echo -e "\nCopy below token code before Click the link to log into K10 Web UI -->> $k10ui" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
+echo "Here is the token to login K10 Web UI" >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
+echo "" | awk '{print $1}' >> gke-token
+
+echo '-------Waiting for K10 services are up running in about 1 or 2 mins'
+kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
+
 echo '-------Kickoff the on-demand backup job'
-sleep 5
 cat <<EOF | kubectl create -f -
 apiVersion: actions.kio.kasten.io/v1alpha1
 kind: RunAction
