@@ -59,6 +59,6 @@ https://kasten.io
 http://k10.yongkang.cloud
 
 # Contributors
-## [Yongkang He](https://github.com/yongkanghe)
 
-## Lei Wei
+## [Yongkang He](https://github.com/yongkanghe)
+## [Lei Wei](https://www.linkedin.com/in/lei-wei-96727950/)
