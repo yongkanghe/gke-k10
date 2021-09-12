@@ -48,7 +48,7 @@ clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo "" | awk '{print $1}' > gke-token
 echo My Cluster ID is $clusterid >> gke-token
 k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}'|grep -v EXTERNAL)/k10/#
-echo -e "\nLogin to K10 Web UI click here -->> $k10ui" >> gke-token
+echo -e "\nCopy below token code before Click the link to log into K10 Web UI -->> $k10ui" >> gke-token
 echo "" | awk '{print $1}' >> gke-token
 sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
 echo "Please enter below token to login" >> gke-token
