@@ -76,7 +76,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: config.kio.kasten.io/v1alpha1
 kind: Profile
 metadata:
-  name: mygcs1
+  name: $MY_OBJECT_STORAGE_PROFILE
   namespace: kasten-io
 spec:
   type: Location
