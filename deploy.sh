@@ -23,7 +23,8 @@ helm install k10 kasten/k10 --namespace=kasten-io \
   --set global.persistence.logging.size=1Gi \
   --set secrets.googleApiKey=$sa_key \
   --set auth.tokenAuth.enabled=true \
-  --set externalGateway.create=true
+  --set externalGateway.create=true \
+  --set metering.mode=airgap 
 
 echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
@@ -41,9 +42,9 @@ deletionPolicy: Delete
 EOF
 
 echo '-------Deploying a PostgreSQL database'
-kubectl create namespace postgresql
+kubectl create namespace k10-postgresql
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --namespace postgresql postgres bitnami/postgresql --set persistence.size=1Gi
+helm install --namespace k10-postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '-------Output the Cluster ID'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
@@ -100,7 +101,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: config.kio.kasten.io/v1alpha1
 kind: Policy
 metadata:
-  name: postgresql-backup
+  name: k10-postgresql-backup
   namespace: kasten-io
 spec:
   comment: ""
@@ -140,7 +141,7 @@ spec:
       - key: k10.kasten.io/appNamespace
         operator: In
         values:
-          - postgresql
+          - k10-postgresql
 EOF
 
 sleep 5
@@ -155,7 +156,7 @@ metadata:
 spec:
   subject:
     kind: Policy
-    name: postgresql-backup
+    name: k10-postgresql-backup
     namespace: kasten-io
 EOF
 
