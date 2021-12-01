@@ -24,7 +24,8 @@ helm install k10 kasten/k10 --namespace=kasten-io \
   --set global.persistence.grafana.size=1Gi \ 
   --set secrets.googleApiKey=$sa_key \
   --set auth.tokenAuth.enabled=true \
-  --set externalGateway.create=true
+  --set externalGateway.create=true \
+  --set metering.mode=airgap
 
 echo '-------Set the default ns to k10'
 kubectl config set-context --current --namespace kasten-io
