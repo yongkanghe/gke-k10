@@ -32,6 +32,13 @@ vi setenv.sh
 5. Create a backup policy
 6. Kick off an on-demand backup job
 
+## NOTE: Kasten K10 can be deployed very quickly
+Sometime, we might end up not getting the Web Console IP. If that's the case, you just run below command to get the K10 URL. Part of this command, we will also kick off an on-demand backup jobs manually.
+
+````
+./get-k10url.sh
+````
+
 # To delete the labs, run 
 ````
 ./destroy.sh
