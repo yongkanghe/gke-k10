@@ -31,7 +31,7 @@ vi setenv.sh
 4. Create a location profile
 5. Create a backup policy
 
-# To retrieve Kasten K10 Console URL and Token code
+# To retrieve Kasten Console URL and Token
 ````
 ./get-k10url.sh
 ````
