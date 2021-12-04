@@ -171,5 +171,7 @@ endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
 echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) seconds."
 echo "" | awk '{print $1}'
+echo "-------Run ./get-k10url.sh to retrieve K10 Console URL and Token"
+echo "" | awk '{print $1}'
 echo "-------Created by Yongkang"
 echo "-------Email me if any suggestions or issues he@yongkang.cloud"
