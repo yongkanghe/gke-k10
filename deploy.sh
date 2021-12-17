@@ -15,12 +15,15 @@ echo '-------Install K10'
 sa_key=$(base64 -w0 k10-sa-key.json)
 kubectl create ns kasten-io
 helm repo add kasten https://charts.kasten.io/
+
+#For Production, remove the lines ending with =1Gi from helm install
 helm install k10 kasten/k10 --namespace=kasten-io \
   --set global.persistence.metering.size=1Gi \
   --set prometheus.server.persistentVolume.size=1Gi \
   --set global.persistence.catalog.size=1Gi \
   --set global.persistence.jobs.size=1Gi \
   --set global.persistence.logging.size=1Gi \
+  --set global.persistence.grafana.size=1Gi \
   --set secrets.googleApiKey=$sa_key \
   --set auth.tokenAuth.enabled=true \
   --set externalGateway.create=true \
