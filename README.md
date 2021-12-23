@@ -47,8 +47,10 @@ vi setenv.sh
 3. Remove all the relevant snapshots
 4. Remove the bucket
 
-# Cick my picture to watch the how-to video.
+# Cick my picture to watch how-to video.
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6vDEk_9cNaI/0.jpg)](https://www.youtube.com/watch?v=6vDEk_9cNaI)
+
+#### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
 
 # For more details about GKE Backup and Restore
 https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using-kasten-k10
