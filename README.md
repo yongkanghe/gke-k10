@@ -1,3 +1,5 @@
+#### Follow [@YongkangHe](https://twitter.com/yongkanghe) on Twitter, Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
+
 I just want to build a GKE Cluster to play with the various Data Management capabilities e.g. Backup/Restore, Disaster Recovery and Application Mobility. 
 
 It is challenging to create a GKE cluster from Google Cloud if you are not familiar to it. After the GKE Cluster is up running, we still need to install Kasten, create a sample DB, create policies etc.. The whole process is not that simple.
@@ -59,6 +61,6 @@ https://kasten.io
 http://k10.yongkang.cloud
 
 # Contributors
+#### Follow [Yongkang He](http://yongkang.cloud) on LinkedIn, Join [Kubernetes Data Management](https://www.linkedin.com/groups/13983251) LinkedIn Group
 
-### [Yongkang He](http://yongkang.cloud)
 ### [Lei Wei](https://www.linkedin.com/in/lei-wei-96727950/)
