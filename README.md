@@ -32,11 +32,7 @@ vi setenv.sh
 3. Deploy a Postgres database
 4. Create a location profile
 5. Create a backup policy
-
-# To retrieve Kasten Console URL and Token
-````
-./get-k10url.sh
-````
+6. The jobs scheduled automatically
 
 # To delete the labs, run 
 ````
