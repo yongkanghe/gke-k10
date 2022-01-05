@@ -9,6 +9,6 @@ echo "" | awk '{print $1}' >> gke-token
 
 cat gke-token
 
-./runonce.sh
+#./runonce.sh
 
 echo "" | awk '{print $1}'
