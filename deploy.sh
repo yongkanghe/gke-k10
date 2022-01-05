@@ -167,6 +167,7 @@ echo '-------Accessing K10 UI'
 k10ui=http://$(kubectl get svc gateway-ext -n kasten-io | awk '{print $4}' | grep -v EXTERNAL)/k10/#
 echo -e "\nCopy below token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke-token
 cat gke-token
+echo "" | awk '{print $1}'
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
