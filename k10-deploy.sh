@@ -149,9 +149,6 @@ EOF
 
 sleep 5
 
-k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}' -n kasten-io | grep -v EXTERNAL)/k10/#
-echo -e "\nCopy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke-token
-
 echo '-------Kickoff the on-demand backup job'
 sleep 5
 cat <<EOF | kubectl create -f -
@@ -167,6 +164,9 @@ spec:
 EOF
 
 echo '-------Accessing K10 UI'
+
+k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}' -n kasten-io | grep -v EXTERNAL)/k10/#
+echo -e "\nCopy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke-token
 cat gke-token
 
 endtime=$(date +%s)
