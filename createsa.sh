@@ -7,6 +7,11 @@ gcloud projects add-iam-policy-binding ${myproject} --member serviceAccount:${k1
 gcloud projects add-iam-policy-binding ${myproject} --member serviceAccount:${k10saemail} --role "roles/storage.admin"
 echo "-------Enabling Google Kubernetes Engine API"
 gcloud services enable container.googleapis.com
+
 clear
+
 echo "-------Google Cloud service account is ready and GKE API enabled"
+echo "" | awk '{print $1}'
+echo "You are ready to deploy now!"
+echo "" | awk '{print $1}'
 
