@@ -15,6 +15,7 @@ echo '-------Install K10'
 sa_key=$(base64 -w0 k10-sa-key.json)
 kubectl create ns kasten-io
 helm repo add kasten https://charts.kasten.io/
+helm repo update
 
 #For Production, remove the lines ending with =1Gi from helm install
 helm install k10 kasten/k10 --namespace=kasten-io \
