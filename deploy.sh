@@ -6,7 +6,7 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
-  --release-channel=regular \
+  --release-channel=rapid \
   --no-enable-basic-auth \
   --addons=GcePersistentDiskCsiDriver \
   --enable-autoscaling --min-nodes 1 --max-nodes 3
