@@ -14,6 +14,7 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
+echo "" | awk '{print $1}'
 echo "-------Total time to build a GKE cluster is $(($duration / 60)) minutes $(($duration % 60)) seconds."
 echo "" | awk '{print $1}'
 echo "-------Created by Yongkang"
