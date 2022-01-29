@@ -1,6 +1,6 @@
 starttime=$(date +%s)
-. setenv.sh
-echo '-------Deleting the GKE Cluster (typically in less than 10 mins)'
+. ./setenv.sh
+echo '-------Deleting the GKE Cluster (typically in few mins)'
 MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
 gkeclustername=$(gcloud container clusters list --format="value(name)" --filter="$MY_PREFIX-$MY_CLUSTER")
 gcloud container clusters delete $gkeclustername --zone $MY_ZONE --quiet
@@ -24,3 +24,4 @@ echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) secon
 echo "" | awk '{print $1}'
 echo "-------Created by Yongkang"
 echo "-------Email me if any suggestions or issues he@yongkang.cloud"
+echo "" | awk '{print $1}'

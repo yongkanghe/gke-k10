@@ -1,22 +1,16 @@
 echo '-------Deploy Kasten K10 and Postgresql in 3 mins)'
 starttime=$(date +%s)
-. setenv.sh
+. ./setenv.sh
 MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
-#gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
-#  --zone $MY_ZONE \
-#  --num-nodes 1 \
-#  --machine-type $MY_MACHINE_TYPE \
-#  --release-channel=regular \
-#  --no-enable-basic-auth \
-#  --addons=GcePersistentDiskCsiDriver \
-#  --enable-autoscaling --min-nodes 1 --max-nodes 3
 
 echo '-------Install K10'
 sa_key=$(base64 -w0 k10-sa-key.json)
 kubectl create ns kasten-io
 helm repo add kasten https://charts.kasten.io/
+helm repo update
 
 #For Production, remove the lines ending with =1Gi from helm install
+#For Production, remove the lines ending with airgap from helm install
 helm install k10 kasten/k10 --namespace=kasten-io \
   --set global.persistence.metering.size=1Gi \
   --set prometheus.server.persistentVolume.size=1Gi \
@@ -51,128 +45,40 @@ helm install --namespace k10-postgresql postgres bitnami/postgresql --set persis
 
 echo '-------Output the Cluster ID'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
-echo "" | awk '{print $1}' > gke-token
-echo My Cluster ID is $clusterid >> gke-token
-
-echo '-------Creating a GCS profile secret'
-myproject=$(gcloud config get-value core/project)
-kubectl create secret generic k10-gcs-secret \
-      --namespace kasten-io \
-      --from-literal=project-id=$myproject \
-      --from-file=service-account.json=k10-sa-key.json
+echo "" | awk '{print $1}' > gke_token
+echo My Cluster ID is $clusterid >> gke_token
 
 echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
 kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
 # k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}' -n kasten-io | grep -v EXTERNAL)/k10/#
-# echo -e "\nCopy below token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
+# echo -e "\nCopy below token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
+echo "" | awk '{print $1}' >> gke_token
 sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
-echo "Here is the token to login K10 Web UI" >> gke-token
-echo "" | awk '{print $1}' >> gke-token
-kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke-token
-echo "" | awk '{print $1}' >> gke-token
+echo "Here is the token to login K10 Web UI" >> gke_token
+echo "" | awk '{print $1}' >> gke_token
+kubectl get secret $sa_secret --namespace kasten-io -ojsonpath="{.data.token}{'\n'}" | base64 --decode | awk '{print $1}' >> gke_token
+echo "" | awk '{print $1}' >> gke_token
 
 echo '-------Waiting for K10 services are up running in about 1 or 2 mins'
 kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
-#~/gke-k10/aws3.sh
-echo '-------Creating a GCS profile'
-cat <<EOF | kubectl apply -f -
-apiVersion: config.kio.kasten.io/v1alpha1
-kind: Profile
-metadata:
-  name: $MY_OBJECT_STORAGE_PROFILE
-  namespace: kasten-io
-spec:
-  type: Location
-  locationSpec:
-    credential:
-      secretType: GcpServiceAccountKey
-      secret:
-        apiVersion: v1
-        kind: Secret
-        name: k10-gcs-secret
-        namespace: kasten-io
-    type: ObjectStore
-    objectStore:
-      name: $MY_PREFIX-$MY_BUCKET
-      objectStoreType: GCS
-      region: $MY_REGION
-EOF
 
-echo '------Create backup policies'
-cat <<EOF | kubectl apply -f -
-apiVersion: config.kio.kasten.io/v1alpha1
-kind: Policy
-metadata:
-  name: k10-postgresql-backup
-  namespace: kasten-io
-spec:
-  comment: ""
-  frequency: "@hourly"
-  actions:
-    - action: backup
-      backupParameters:
-        profile:
-          namespace: kasten-io
-          name: mygcs1
-    - action: export
-      exportParameters:
-        frequency: "@hourly"
-        migrationToken:
-          name: ""
-          namespace: ""
-        profile:
-          name: mygcs1
-          namespace: kasten-io
-        receiveString: ""
-        exportData:
-          enabled: true
-      retention:
-        hourly: 0
-        daily: 0
-        weekly: 0
-        monthly: 0
-        yearly: 0
-  retention:
-    hourly: 4
-    daily: 1
-    weekly: 1
-    monthly: 0
-    yearly: 0
-  selector:
-    matchExpressions:
-      - key: k10.kasten.io/appNamespace
-        operator: In
-        values:
-          - k10-postgresql
-EOF
+#Create a S3 location profile
+./gcs-location.sh
 
-sleep 5
-
-echo '-------Kickoff the on-demand backup job'
-sleep 5
-cat <<EOF | kubectl create -f -
-apiVersion: actions.kio.kasten.io/v1alpha1
-kind: RunAction
-metadata:
-  generateName: run-backup-
-spec:
-  subject:
-    kind: Policy
-    name: k10-postgresql-backup
-    namespace: kasten-io
-EOF
+#Create a Cassandra backup policy
+./postgresql-policy.sh
 
 echo '-------Accessing K10 UI'
 
 k10ui=http://$(kubectl get svc gateway-ext -n kasten-io | awk '{print $4}' | grep -v EXTERNAL)/k10/#
-echo -e "\nCopy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke-token
-cat gke-token
+echo -e "Copy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
+cat gke_token
 echo "" | awk '{print $1}'
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
-echo "-------Total time is $(($duration / 60)) minutes $(($duration % 60)) seconds."
+echo "-------Total time for K10+DB+Policy deployment is $(($duration / 60)) minutes $(($duration % 60)) seconds."
 echo "" | awk '{print $1}'
 echo "-------Created by Yongkang"
 echo "-------Email me if any suggestions or issues he@yongkang.cloud"
+echo "" | awk '{print $1}'
