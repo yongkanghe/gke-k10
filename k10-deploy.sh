@@ -48,13 +48,6 @@ clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
 echo "" | awk '{print $1}' > gke_token
 echo My Cluster ID is $clusterid >> gke_token
 
-echo '-------Creating a GCS profile secret'
-myproject=$(gcloud config get-value core/project)
-kubectl create secret generic k10-gcs-secret \
-      --namespace kasten-io \
-      --from-literal=project-id=$myproject \
-      --from-file=service-account.json=k10-sa-key.json
-
 echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
 kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
 # k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}' -n kasten-io | grep -v EXTERNAL)/k10/#
