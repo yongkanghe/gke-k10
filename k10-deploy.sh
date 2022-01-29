@@ -10,6 +10,7 @@ helm repo add kasten https://charts.kasten.io/
 helm repo update
 
 #For Production, remove the lines ending with =1Gi from helm install
+#For Production, remove the lines ending with airgap from helm install
 helm install k10 kasten/k10 --namespace=kasten-io \
   --set global.persistence.metering.size=1Gi \
   --set prometheus.server.persistentVolume.size=1Gi \
@@ -67,7 +68,6 @@ echo "" | awk '{print $1}' >> gke_token
 
 echo '-------Waiting for K10 services are up running in about 1 or 2 mins'
 kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=catalog
-#~/gke-k10/aws3.sh
 
 #Create a S3 location profile
 ./gcs-location.sh
@@ -75,98 +75,10 @@ kubectl wait --for=condition=ready --timeout=300s -n kasten-io pod -l component=
 #Create a Cassandra backup policy
 ./postgresql-policy.sh
 
-# echo '-------Creating a GCS profile'
-# cat <<EOF | kubectl apply -f -
-# apiVersion: config.kio.kasten.io/v1alpha1
-# kind: Profile
-# metadata:
-#   name: $MY_OBJECT_STORAGE_PROFILE
-#   namespace: kasten-io
-# spec:
-#   type: Location
-#   locationSpec:
-#     credential:
-#       secretType: GcpServiceAccountKey
-#       secret:
-#         apiVersion: v1
-#         kind: Secret
-#         name: k10-gcs-secret
-#         namespace: kasten-io
-#     type: ObjectStore
-#     objectStore:
-#       name: $MY_PREFIX-$MY_BUCKET
-#       objectStoreType: GCS
-#       region: $MY_REGION
-# EOF
-
-# echo '------Create backup policies'
-# cat <<EOF | kubectl apply -f -
-# apiVersion: config.kio.kasten.io/v1alpha1
-# kind: Policy
-# metadata:
-#   name: k10-postgresql-backup
-#   namespace: kasten-io
-# spec:
-#   comment: ""
-#   frequency: "@hourly"
-#   actions:
-#     - action: backup
-#       backupParameters:
-#         profile:
-#           namespace: kasten-io
-#           name: mygcs1
-#     - action: export
-#       exportParameters:
-#         frequency: "@hourly"
-#         migrationToken:
-#           name: ""
-#           namespace: ""
-#         profile:
-#           name: mygcs1
-#           namespace: kasten-io
-#         receiveString: ""
-#         exportData:
-#           enabled: true
-#       retention:
-#         hourly: 0
-#         daily: 0
-#         weekly: 0
-#         monthly: 0
-#         yearly: 0
-#   retention:
-#     hourly: 4
-#     daily: 1
-#     weekly: 1
-#     monthly: 0
-#     yearly: 0
-#   selector:
-#     matchExpressions:
-#       - key: k10.kasten.io/appNamespace
-#         operator: In
-#         values:
-#           - k10-postgresql
-# EOF
-
-# sleep 5
-
-# echo '-------Kickoff the on-demand backup job'
-# sleep 5
-# cat <<EOF | kubectl create -f -
-# apiVersion: actions.kio.kasten.io/v1alpha1
-# kind: RunAction
-# metadata:
-#   generateName: run-backup-
-# spec:
-#   subject:
-#     kind: Policy
-#     name: k10-postgresql-backup
-#     namespace: kasten-io
-# EOF
-
 echo '-------Accessing K10 UI'
 
 k10ui=http://$(kubectl get svc gateway-ext -n kasten-io | awk '{print $4}' | grep -v EXTERNAL)/k10/#
-echo -e "\nCopy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
+echo -e "Copy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
 cat gke_token
 echo "" | awk '{print $1}'
 
