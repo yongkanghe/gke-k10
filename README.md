@@ -64,8 +64,8 @@ https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using
 # Kasten - No. 1 Kubernetes Backup
 https://kasten.io 
 
-# Kasten - DevOps tool of the month July 2021
-http://k10.yongkang.cloud
+# Build, Protect and Migrate
+https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ
 
 # Contributors
 #### Follow [Yongkang He](http://yongkang.cloud) on LinkedIn, Join [Kubernetes Data Management](https://www.linkedin.com/groups/13983251) LinkedIn Group
