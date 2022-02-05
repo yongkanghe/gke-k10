@@ -8,6 +8,8 @@ It is challenging to create a GKE cluster from Google Cloud if you are not famil
 
 This script based automation allows you to build a ready-to-use Kasten K10 demo environment running on GKE in about 6 minutes. For simplicity and cost optimization, the GKE cluster will have only one worker node and be built in the default vpc using the default subnet. This is bash shell based scripts which has been tested on Cloud Shell. Linux or MacOS terminal has not been tested though it might work as well. 
 
+If you already have a GKE cluster running, you only need 3 minutes to protect containers on GKE cluster by k10-deploy.sh. 
+
 # Here're the prerequisities. 
 1. Go to open Google Cloud Shell
 2. Clone the github repo to your local host, run below command
@@ -22,7 +24,31 @@ cd gke-k10;./createsa.sh
 ````
 vi setenv.sh
 ````
- 
+
+
+# Deploy based on your needs
+
+| Don't have a GKE cluster  | Already have a GKE cluster      | Have nothing                    |
+|---------------------------|---------------------------------|---------------------------------|
+| Deploy GKE                | Deploy K10                      | Deploy GKE and K10              |
+| ``` ./gke-deploy.sh ```   | ``` ./k10-deploy.sh ```         | ``` ./deploy.sh ```             |
+| 1.Create a GKE Cluster    |                                 | 1.Create a GKE Cluster          |
+|                           | 1.Install Kasten K10            | 2.Install Kasten K10            |
+|                           | 2.Deploy a Postgresql database  | 3.Deploy a Postgresql database  |
+|                           | 3.Create a GCS profile          | 4.Create a GCS profile          |
+|                           | 4.Create a backup policy        | 5.Create a backup policy        |
+|                           | 5.Kick off on-demand backup job | 6.Kick off on-demand backup job |
+
+# Destroy based on your needs
+
+| Destroy GKE               | Destroy K10                         | Destroy GKE and K10                 |
+|---------------------------|-------------------------------------|-------------------------------------|
+| ``` ./gke-destroy.sh ```  | ``` ./k10-destroy.sh ```            | ``` ./destroy.sh ```                |
+| 1.Remove the GKE Cluster  |                                     | 1.Remove the GKE Cluster            |
+|                           | 1.Remove all the relevant disks     | 2.Remove all the relevant disks     |
+|                           | 2.Remove all the relevant snapshots | 3.Remove all the relevant snapshots |
+|                           | 3.Remove the GCS storage bucket     | 4.Remove the GCS storage bucket     |
+
 # To build the labs, run 
 ````
 ./deploy.sh
