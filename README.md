@@ -49,34 +49,17 @@ vi setenv.sh
 |                           | 2.Remove all the relevant snapshots | 3.Remove all the relevant snapshots |
 |                           | 3.Remove the GCS storage bucket     | 4.Remove the GCS storage bucket     |
 
-# To build the labs, run 
-````
-./deploy.sh
-````
-1. Create a GKE Cluster from CLI
-2. Install Kasten K10
-3. Deploy a Postgres database
-4. Create a location profile
-5. Create a backup policy
-6. The jobs scheduled automatically
+# Build a GKE cluster via Web UI
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YwfPqR5phLM/0.jpg)](https://www.youtube.com/watch?v=YwfPqR5phLM)
+#### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
 
-# To delete the labs, run 
-````
-./destroy.sh
-````
-1. Remove GKE Kubernetes Cluster
-2. Remove all the relevant disks
-3. Remove all the relevant snapshots
-4. Remove the bucket
-
-# Cick my picture to watch how-to video.
+# Build a GKE + K10 via Automation
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6vDEk_9cNaI/0.jpg)](https://www.youtube.com/watch?v=6vDEk_9cNaI)
 
 #### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
 
-# For more details about GKE Backup and Restore
+# GKE Backup and Restore
 https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using-kasten-k10
-
 
 # Kasten - No. 1 Kubernetes Backup
 https://kasten.io 
