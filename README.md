@@ -65,7 +65,7 @@ https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using
 https://kasten.io 
 
 # Build, Protect and Migrate Containers
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6vDEk_9cNaI/0.jpg)](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/mjG-GOnJ-Lo/0.jpg)](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ)
 
 # Contributors
 #### Follow [Yongkang He](http://yongkang.cloud) on LinkedIn, Join [Kubernetes Data Management](https://www.linkedin.com/groups/13983251) LinkedIn Group
