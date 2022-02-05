@@ -45,7 +45,7 @@ vi setenv.sh
 |---------------------------|-------------------------------------|-------------------------------------|
 | ``` ./gke-destroy.sh ```  | ``` ./k10-destroy.sh ```            | ``` ./destroy.sh ```                |
 | 1.Remove the GKE Cluster  |                                     | 1.Remove the GKE Cluster            |
-|                           | 1.Remove Postgresql                 | 2.Remove all the relevant disks     |
+|                           | 1.Remove Postgresql database        | 2.Remove all the relevant disks     |
 |                           | 2.Remove Kasten K10                 | 3.Remove all the relevant snapshots |
 |                           | 3.Remove the GCS storage bucket     | 4.Remove the GCS storage bucket     |
 
