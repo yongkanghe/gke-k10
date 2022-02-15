@@ -1,4 +1,4 @@
-echo '-------Deploy Kasten K10 and Postgresql in 3 mins)'
+echo '-------Deploy Kasten K10 and Postgresql in 3 mins'
 starttime=$(date +%s)
 . ./setenv.sh
 MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
