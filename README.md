@@ -71,6 +71,9 @@ https://blog.kasten.io/posts/postgresql-backup-and-restore-on-google-cloud-using
 # Kasten - No. 1 Kubernetes Backup
 https://kasten.io 
 
+# FREE Kubernetes Learning
+https://learning.kasten.io 
+
 # Contributors
 #### Follow [Yongkang He](http://yongkang.cloud) on LinkedIn, Join [Kubernetes Data Management](https://www.linkedin.com/groups/13983251) LinkedIn Group
 
