@@ -10,6 +10,10 @@ This script based automation allows you to build a ready-to-use Kasten K10 demo 
 
 If you already have a GKE cluster running, you only need 3 minutes to protect containers on GKE cluster by k10-deploy.sh. 
 
+# Create a Google Cloud Trial Account
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rjZsH3IeSrE/0.jpg)](https://www.youtube.com/watch?v=rjZsH3IeSrE)
+#### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
+
 # Here're the prerequisities. 
 1. Go to open Google Cloud Shell
 2. Clone the github repo to your local host, run below command
