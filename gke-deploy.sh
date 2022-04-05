@@ -9,8 +9,8 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --machine-type $MY_MACHINE_TYPE \
   --release-channel=regular \
   --no-enable-basic-auth \
-  --addons=GcePersistentDiskCsiDriver \
-  --enable-autoscaling --min-nodes 1 --max-nodes 3
+  --addons=GcePersistentDiskCsiDriver
+#  --enable-autoscaling --min-nodes 1 --max-nodes 3
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
