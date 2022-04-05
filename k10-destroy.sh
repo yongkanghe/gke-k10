@@ -6,10 +6,10 @@ gkeclustername=$(gcloud container clusters list --format="value(name)" --filter=
 #gcloud container clusters delete $gkeclustername --zone $MY_ZONE --quiet
 
 echo '-------Uninstalling postgresql and kasten'
-helm uninstall postgres -n k10-postgresql
+helm uninstall postgres -n yong-postgresql
 helm uninstall k10 -n kasten-io
 
-kubectl delete ns k10-postgresql
+kubectl delete ns yong-postgresql
 kubectl delete ns kasten-io
 
 kubectl delete secret k10-gcs-secret -n kasten-io
