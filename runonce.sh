@@ -7,6 +7,6 @@ metadata:
 spec:
   subject:
     kind: Policy
-    name: k10-postgresql-backup
+    name: yong-postgresql-backup
     namespace: kasten-io
 EOF
