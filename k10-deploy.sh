@@ -39,9 +39,9 @@ deletionPolicy: Delete
 EOF
 
 echo '-------Deploying a PostgreSQL database'
-kubectl create namespace k10-postgresql
+kubectl create namespace yong-postgresql
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --namespace k10-postgresql postgres bitnami/postgresql --set persistence.size=1Gi
+helm install --namespace yong-postgresql postgres bitnami/postgresql --set persistence.size=1Gi
 
 echo '-------Output the Cluster ID'
 clusterid=$(kubectl get namespace default -ojsonpath="{.metadata.uid}{'\n'}")
@@ -51,7 +51,7 @@ echo My Cluster ID is $clusterid >> gke_token
 echo '-------Wait for 1 or 2 mins for the Web UI IP and token'
 kubectl wait --for=condition=ready --timeout=180s -n kasten-io pod -l component=jobs
 # k10ui=http://$(kubectl get svc gateway-ext | awk '{print $4}' -n kasten-io | grep -v EXTERNAL)/k10/#
-# echo -e "\nCopy below token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
+# echo -e "\nDouble Click to copy the token before clicking the link to log into K10 Web UI -->> $k10ui" >> gke_token
 echo "" | awk '{print $1}' >> gke_token
 sa_secret=$(kubectl get serviceaccount k10-k10 -o jsonpath="{.secrets[0].name}" --namespace kasten-io)
 echo "Here is the token to login K10 Web UI" >> gke_token
