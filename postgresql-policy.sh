@@ -1,5 +1,8 @@
 . ./setenv.sh
-MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
+TEMP_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
+FIRST2=$(echo -n $TEMP_PREFIX | head -c2)
+LAST2=$(echo -n $TEMP_PREFIX | tail -c2)
+MY_PREFIX=$(echo $FIRST2$LAST2)
 
 echo '------Create backup policies'
 cat <<EOF | kubectl apply -f -
