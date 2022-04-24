@@ -1,7 +1,11 @@
 starttime=$(date +%s)
 . ./setenv.sh
 echo '-------Deleting Kasten K10 and Postgresql (typically in few mins)'
-MY_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
+TEMP_PREFIX=$(echo $(whoami) | sed -e 's/\_//g' | sed -e 's/\.//g' | awk '{print tolower($0)}')
+FIRST2=$(echo -n $TEMP_PREFIX | head -c2)
+LAST2=$(echo -n $TEMP_PREFIX | tail -c2)
+MY_PREFIX=$(echo $FIRST2$LAST2)
+
 gkeclustername=$(gcloud container clusters list --format="value(name)" --filter="$MY_PREFIX-$MY_CLUSTER")
 #gcloud container clusters delete $gkeclustername --zone $MY_ZONE --quiet
 
