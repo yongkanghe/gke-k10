@@ -53,6 +53,9 @@ vi setenv.sh
 |                           | 2.Remove Kasten K10                 | 3.Remove all the relevant snapshots |
 |                           | 3.Remove the GCS storage bucket     | 4.Remove the GCS storage bucket     |
 
+# K10 on GKE self-paced Lab Guide
+http://gcp-lg.yongkang.cloud
+
 # Build a GKE cluster via Web UI
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YwfPqR5phLM/0.jpg)](https://www.youtube.com/watch?v=YwfPqR5phLM)
 #### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
