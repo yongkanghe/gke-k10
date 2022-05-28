@@ -56,6 +56,10 @@ vi setenv.sh
 # K10 on GKE self-paced Lab Guide
 http://gcp-lg.yongkang.cloud
 
+# Kasten on GCP Workshop
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/vPVV73m0Gd8/0.jpg)](https://www.youtube.com/watch?v=vPVV73m0Gd8)
+#### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
+
 # Build a GKE cluster via Web UI
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YwfPqR5phLM/0.jpg)](https://www.youtube.com/watch?v=YwfPqR5phLM)
 #### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
@@ -67,13 +71,6 @@ http://gcp-lg.yongkang.cloud
 # Build a GKE + K10 via Automation
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6vDEk_9cNaI/0.jpg)](https://www.youtube.com/watch?v=6vDEk_9cNaI)
 #### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
-
-# Kasten on GCP Workshop
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/vPVV73m0Gd8/0.jpg)](https://www.youtube.com/watch?v=vPVV73m0Gd8)
-#### Subscribe [K8s Data Management](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ?sub_confirmation=1) Youtube Channel
-
-# K10 on GKE self-paced Lab Guide
-http://gcp-lg.yongkang.cloud
 
 # Build, Protect and Migrate Containers
 [![IMAGE ALT TEXT HERE](https://pbs.twimg.com/media/FK5rsaeXwAIEmtI?format=jpg&name=small)](https://www.youtube.com/channel/UCm-sw1b23K-scoVSCDo30YQ)
