@@ -13,7 +13,7 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --release-channel=rapid \
   --cluster-version 1.25.0-gke.1100 \
   --no-enable-basic-auth \
-  --addons=GcePersistentDiskCsiDriver
+  --addons=GcePersistentDiskCsiDriver \
   --enable-autoscaling --min-nodes 1 --max-nodes 3
 
 endtime=$(date +%s)
