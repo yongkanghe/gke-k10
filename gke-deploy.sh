@@ -10,10 +10,11 @@ gcloud container clusters create $MY_PREFIX-$MY_CLUSTER-$(date +%s) \
   --zone $MY_ZONE \
   --num-nodes 1 \
   --machine-type $MY_MACHINE_TYPE \
-  --release-channel=regular \
+  --release-channel=rapid \
+  --cluster-version 1.25.0-gke.1100 \
   --no-enable-basic-auth \
   --addons=GcePersistentDiskCsiDriver
-#  --enable-autoscaling --min-nodes 1 --max-nodes 3
+  --enable-autoscaling --min-nodes 1 --max-nodes 3
 
 endtime=$(date +%s)
 duration=$(( $endtime - $starttime ))
